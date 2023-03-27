@@ -27,26 +27,6 @@ app.use(ejsLayouts);
 
 app.set("view engine", "ejs");
 
-// Routes start here
-
-app.get("/reminders", reminderController.list);
-
-app.get("/reminder/new", reminderController.new);
-
-app.get("/reminder/:id", reminderController.listOne);
-
-app.get("/reminder/:id/edit", reminderController.edit);
-
-app.post("/reminder/", reminderController.create);
-
-// Implement this yourself
-app.post("/reminder/update/:id", reminderController.update);
-
-// Implement this yourself
-app.post("/reminder/delete/:id", reminderController.delete);
-
-app.get("/reminder/:id/delete-tag/:tag", reminderController.deleteTag);
-
 const passport = require("./middleware/passport");
 const {
   forwardAuthenticated,
@@ -62,6 +42,34 @@ app.get("/register", authController.register);
 app.get("/login", forwardAuthenticated, authController.login);
 app.post("/register", authController.registerSubmit);
 app.post("/login", authController.loginSubmit);
+
+// Routes start here
+
+app.get("/reminders", ensureAuthenticated, reminderController.list);
+
+app.get("/reminder/new", reminderController.new);
+
+app.get("/reminder/:id", ensureAuthenticated, reminderController.listOne);
+
+app.get("/reminder/:id/edit", ensureAuthenticated, reminderController.edit);
+
+app.post("/reminder/", reminderController.create);
+
+// Implement this yourself
+app.post(
+  "/reminder/update/:id",
+  ensureAuthenticated,
+  reminderController.update
+);
+
+// Implement this yourself
+app.post(
+  "/reminder/delete/:id",
+  ensureAuthenticated,
+  reminderController.delete
+);
+
+app.get("/reminder/:id/delete-tag/:tag", reminderController.deleteTag);
 
 app.listen(3001, function () {
   console.log(
