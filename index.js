@@ -47,13 +47,13 @@ app.post("/login", authController.loginSubmit);
 
 app.get("/reminders", ensureAuthenticated, reminderController.list);
 
-app.get("/reminder/new", reminderController.new);
+app.get("/reminder/new", ensureAuthenticated, reminderController.new);
 
 app.get("/reminder/:id", ensureAuthenticated, reminderController.listOne);
 
 app.get("/reminder/:id/edit", ensureAuthenticated, reminderController.edit);
 
-app.post("/reminder/", reminderController.create);
+app.post("/reminder/", ensureAuthenticated, reminderController.create);
 
 // Implement this yourself
 app.post(

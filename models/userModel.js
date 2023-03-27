@@ -1,13 +1,11 @@
 const database = [
   {
     id: 1,
-    name: "Aline",
     email: "aline@gmail.com",
     password: "aline123!",
   },
   {
     id: 2,
-    name: "Roger",
     email: "roger@gmail.com",
     password: "roger123!",
   },

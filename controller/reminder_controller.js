@@ -27,13 +27,13 @@ let remindersController = {
 
   create: (req, res) => {
     let reminder = {
-      id: database.cindy.reminders.length + 1,
+      id: database[req.user.id].reminders.length + 1,
       title: req.body.title,
       description: req.body.description,
       completed: false,
       tags: req.body.tags.split(",").map((tag) => tag.trim()),
     };
-    database.cindy.reminders.push(reminder);
+    database[req.user.id].reminders.push(reminder);
     res.redirect("/reminders");
   },
 
@@ -56,7 +56,7 @@ let remindersController = {
     if (searchResult != undefined) {
       searchResult.title = req.body.title;
       searchResult.description = req.body.description;
-      searchResult.completed = req.body.completed === 'true';
+      searchResult.completed = req.body.completed === "true";
       searchResult.tags = req.body.tags.split(",").map((tag) => tag.trim());
     }
     // Display the list of all reminders

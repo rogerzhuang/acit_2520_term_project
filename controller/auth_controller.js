@@ -1,5 +1,6 @@
 let database = require("../database");
 const passport = require("../middleware/passport");
+const userDatabase = require("../models/userModel").database;
 
 let authController = {
   login: (req, res) => {
@@ -18,7 +19,14 @@ let authController = {
   },
 
   registerSubmit: (req, res) => {
-    // implement
+    const user = {
+      id: userDatabase.length + 1,
+      email: req.body.email,
+      password: req.body.password,
+    };
+    userDatabase.push(user);
+    database[user.id] = { reminders: [] };
+    res.redirect("/login");
   },
 };
 
