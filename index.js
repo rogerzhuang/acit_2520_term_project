@@ -76,8 +76,10 @@ app.get(
   reminderController.deleteTag
 );
 
-app.listen(3001, function () {
+const port = process.env.PORT || 3001; // use the port number provided by Netlify or default to 3001
+
+app.listen(port, function () {
   console.log(
-    "Server running. Visit: localhost:3001/reminders in your browser 🚀"
+    `Server running. Visit: http://localhost:${port}/reminders in your browser 🚀`
   );
 });
