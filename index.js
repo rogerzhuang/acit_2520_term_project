@@ -42,6 +42,7 @@ app.get("/register", authController.register);
 app.get("/login", forwardAuthenticated, authController.login);
 app.post("/register", authController.registerSubmit);
 app.post("/login", authController.loginSubmit);
+app.post("/signup", authController.signup);
 
 // Routes start here
 

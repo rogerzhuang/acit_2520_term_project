@@ -4,19 +4,30 @@ const userDatabase = require("../models/userModel").database;
 
 let authController = {
   login: (req, res) => {
-    res.render("auth/login");
+    console.log(req.session);
+    res.render("auth/login", { error: req.session.messages });
   },
 
   register: (req, res) => {
     res.render("auth/register");
   },
 
-  loginSubmit: (req, res, next) => {
-    passport.authenticate("local", {
-      successRedirect: "/reminders",
-      failureRedirect: "/login",
-    })(req, res, next);
+  signup: (req, res) => {
+    res.render("auth/register", { email: req.body.email });
   },
+
+  // loginSubmit: (req, res, next) => {
+  //   passport.authenticate("local", {
+  //     successRedirect: "/reminders",
+  //     failureRedirect: "/login",
+  //   })(req, res, next);
+  // },
+
+  loginSubmit: passport.authenticate("local", {
+    successRedirect: "/reminders",
+    failureRedirect: "/login",
+    failureMessage: true,
+  }),
 
   registerSubmit: (req, res) => {
     const user = {
