@@ -74,11 +74,11 @@ let remindersController = {
   deleteTag: (req, res) => {
     const reminderId = parseInt(req.params.id);
     const tagName = req.params.tag;
-    const reminder = database.cindy.reminders.find(function (reminder) {
+    const reminder = database[req.user.id].reminders.find((reminder) => {
       return reminder.id === reminderId;
     });
     if (reminder !== undefined) {
-      reminder.tags = reminder.tags.filter(function (tag) {
+      reminder.tags = reminder.tags.filter((tag) => {
         return tag !== tagName;
       });
     }

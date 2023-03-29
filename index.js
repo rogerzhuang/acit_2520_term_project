@@ -70,7 +70,11 @@ app.post(
   reminderController.delete
 );
 
-app.get("/reminder/:id/delete-tag/:tag", reminderController.deleteTag);
+app.get(
+  "/reminder/:id/delete-tag/:tag",
+  ensureAuthenticated,
+  reminderController.deleteTag
+);
 
 app.listen(3001, function () {
   console.log(
