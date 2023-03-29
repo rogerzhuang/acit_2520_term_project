@@ -13,6 +13,15 @@
           <% } %>
         </h4>
 
+        <div class="tags">
+          <% reminderItem.tags.forEach(function(tag) { %>
+            <div class="tag">
+              <span class="tag-name"><%= tag %></span>
+              <a href="/reminder/<%= reminderItem.id %>/delete-tag/<%= tag %>" class="tag-delete">&times;</a>
+            </div>
+          <% }); %>
+        </div>
+
         <a class="btn btn-warning" href=<%= "/reminder/" + reminderItem.id + "/edit" %>>Edit</a>
 
         <form class="deleteForm "method="POST" action=<%= "/reminder/delete/" + reminderItem.id %>>
