@@ -1,0 +1,20 @@
+<div class="container">
+    <h1 class="page-header">Users</h1>
+  
+    <% if (users.length === 0) { %>
+      <p>No users found.</p>
+    <% } else { %>
+      <ul class="list-group">
+        <% users.forEach(function (user) { %>
+          <li class="list-group-item">
+            <strong><%= user.email %></strong>
+            <% if (user.isLoggedIn) { %>
+              <span class="badge badge-success">Online</span>
+            <% } else { %>
+              <span class="badge badge-danger">Offline</span>
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
