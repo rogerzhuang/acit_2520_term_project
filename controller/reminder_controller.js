@@ -19,7 +19,9 @@ let remindersController = {
       return reminder.id == reminderToFind;
     });
     if (searchResult != undefined) {
-      res.render("reminder/single-reminder", { reminderItem: searchResult });
+      res.render("reminder/single-reminder", {
+        reminderItem: searchResult,
+      });
     } else {
       res.redirect("/reminders");
     }

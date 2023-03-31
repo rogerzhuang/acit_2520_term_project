@@ -29,6 +29,7 @@ app.set("view engine", "ejs");
 
 const passport = require("./middleware/passport");
 const {
+  isAuthenticated,
   forwardAuthenticated,
   ensureAuthenticated,
 } = require("./middleware/checkAuth");
@@ -36,6 +37,7 @@ const {
 // Middleware for express
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(isAuthenticated);
 
 // Fix this to work with passport! The registration does not need to work, you can use the fake database for this.
 app.get("/register", authController.register);
@@ -43,6 +45,7 @@ app.get("/login", forwardAuthenticated, authController.login);
 app.post("/register", authController.registerSubmit);
 app.post("/login", authController.loginSubmit);
 app.post("/signup", authController.signup);
+app.get("/logout", ensureAuthenticated, authController.logout);
 
 // Routes start here
 
