@@ -59,7 +59,11 @@ let remindersController = {
       searchResult.title = req.body.title;
       searchResult.description = req.body.description;
       searchResult.completed = req.body.completed === "true";
-      searchResult.tags = req.body.tags.split(",").map((tag) => tag.trim());
+      if (req.body.tags !== "") {
+        searchResult.tags = req.body.tags.split(",").map((tag) => tag.trim());
+      } else {
+        searchResult.tags = [];
+      }
     }
     // Display the list of all reminders
     res.redirect("/reminders");
