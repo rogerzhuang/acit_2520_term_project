@@ -1,52 +1,35 @@
 <div class="container">
-    <h1 class="page-header">Users</h1>
-  
-    <% if (users.length === 0) { %>
-    <p>No users found.</p>
-    <% } else { %>
-    <ul class="list-group">
-      <% users.forEach(function (user) { %>
-      <li class="list-group-item">
-        <div class="form-check">
-          <div class="toggle-button">
-            <input type="checkbox" id="toggle-<%= user.id %>" />
-            <label for="toggle-<%= user.id %>">
-              <div class="toggle-ball"></div>
-            </label>
-          </div>
-          <label class="form-check-label" for="toggle-<%= user.id %>">
-            <strong><%= user.email %></strong>
-            <% if (user.isLoggedIn) { %>
-            <span class="badge badge-success">Online</span>
-            <% } else { %>
-            <span class="badge badge-danger">Offline</span>
-            <% } %>
+  <h1 class="page-header">Users</h1>
+
+  <% if (users.length === 0) { %>
+  <p>No users found.</p>
+  <% } else { %>
+  <ul class="list-group">
+    <% users.forEach(function (user) { %>
+    <li class="list-group-item">
+      <div class="form-check">
+        <div class="toggle-button">
+          <input type="checkbox" id="toggle-<%= user.id %>" />
+          <label for="toggle-<%= user.id %>">
+            <div class="toggle-ball"></div>
           </label>
         </div>
-      </li>
-      <% }) %>
-    </ul>
-    <% } %>
-  </div>
-  
-  <script>
-    const toggleButtons = document.querySelectorAll('.toggle-button');
-  
-    toggleButtons.forEach(toggleButton => {
-      const toggleCheckbox = toggleButton.querySelector('input[type="checkbox"]');
-  
-      toggleCheckbox.checked = true; // set checkbox to be checked by default
-  
-      toggleButton.classList.add('red'); // set button to have red background by default
-  
-      toggleButton.addEventListener('click', function(event) {
-        const isChecked = toggleCheckbox.checked;
-        this.classList.toggle('green', isChecked);
-        this.classList.toggle('red', !isChecked);
-        this.querySelector('.toggle-ball').classList.toggle('active', isChecked);
-      });
-    });
-  </script>
+        <label class="form-check-label" for="toggle-<%= user.id %>">
+          <strong><%= user.email %></strong>
+          <% if (user.isLoggedIn) { %>
+          <span class="badge badge-success">Online</span>
+          <% } else { %>
+          <span class="badge badge-danger">Offline</span>
+          <% } %>
+        </label>
+      </div>
+    </li>
+    <% }) %>
+  </ul>
+  <% } %>
+</div>
+
+
   
   
   

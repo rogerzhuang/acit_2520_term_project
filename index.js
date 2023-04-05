@@ -39,6 +39,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(isAuthenticated);
 
+// app.use((req, res, next) => {
+//   if (req.user) {
+//     res.locals.isLoggedIn = true;
+//   } else {
+//     res.locals.isLoggedIn = false;
+//   }
+// })
+
 // Fix this to work with passport! The registration does not need to work, you can use the fake database for this.
 app.get("/register", authController.register);
 app.get("/login", forwardAuthenticated, authController.login);
